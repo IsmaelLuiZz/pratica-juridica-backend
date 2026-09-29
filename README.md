@@ -12,7 +12,7 @@ Projeto desenvolvido para a disciplina de Estágio Supervisionado (Ciência da C
 ### Passo a Passo
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/pratica-juridica-backend.git
+   git clone https://github.com/IsmaelLuiZz/pratica-juridica-backend
 
 Acesse a pasta do projeto: cd pratica-juridica-backend
 
