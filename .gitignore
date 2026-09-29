@@ -1,0 +1,17 @@
+# Ambientes e Dependências
+node_modules/
+bin/
+obj/
+venv/
+.env
+.env.local
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.user
+
+# Build e Cobertura
+dist/
+build/
+*.log
