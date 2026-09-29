@@ -1,0 +1,68 @@
+-- Criação de Enum para Perfil de Usuário
+CREATE TYPE perfil_usuario AS ENUM ('ALUNO', 'PROFESSOR', 'ADMIN');
+
+-- Tabela: USUARIO
+CREATE TABLE IF NOT EXISTS usuario (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    perfil perfil_usuario NOT NULL,
+    ativo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela: ASSISTIDO
+CREATE TABLE IF NOT EXISTS assistido (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    contato VARCHAR(100) NOT NULL,
+    ativo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela: CASO_JURIDICO
+CREATE TABLE IF NOT EXISTS caso_juridico (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    tipo_acao VARCHAR(100) NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'EM_ANDAMENTO',
+    assistido_id INT NOT NULL REFERENCES assistido(id) ON DELETE RESTRICT,
+    aluno_id INT NOT NULL REFERENCES usuario(id) ON DELETE RESTRICT,
+    professor_id INT NOT NULL REFERENCES usuario(id) ON DELETE RESTRICT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela: ATENDIMENTO
+CREATE TABLE IF NOT EXISTS atendimento (
+    id SERIAL PRIMARY KEY,
+    relato TEXT NOT NULL,
+    caso_juridico_id INT NOT NULL REFERENCES caso_juridico(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela: ATIVIDADE
+CREATE TABLE IF NOT EXISTS atividade (
+    id SERIAL PRIMARY KEY,
+    descricao TEXT NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'PENDENTE',
+    caso_juridico_id INT NOT NULL REFERENCES caso_juridico(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela: DOCUMENTO
+CREATE TABLE IF NOT EXISTS documento (
+    id SERIAL PRIMARY KEY,
+    url TEXT NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'PENDENTE_VALIDACAO', -- Ex: APROVADO, REJEITADO (RN01)
+    caso_juridico_id INT NOT NULL REFERENCES caso_juridico(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela: PRAZO
+CREATE TABLE IF NOT EXISTS prazo (
+    id SERIAL PRIMARY KEY,
+    vencimento DATE NOT NULL,
+    caso_juridico_id INT NOT NULL REFERENCES caso_juridico(id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
