@@ -5,7 +5,8 @@ import app.models.assistido
 from app.routers import assistido
 import app.models.caso_juridico
 from app.routers import caso_juridico
-
+from app.routers import atendimento
+import app.models.atendimento
 # Cria as tabelas na base de dados (se ainda não existirem)
 Base.metadata.create_all(bind=engine)
 
@@ -19,6 +20,7 @@ app = FastAPI(
 app.include_router(aluno.router)
 app.include_router(assistido.router)
 app.include_router(caso_juridico.router)
+app.include_router(atendimento.router)
 
 @app.get("/")
 def root():
