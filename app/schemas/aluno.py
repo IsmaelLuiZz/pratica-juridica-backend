@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime
-from app.models.usuario import PerfilEnum
+from app.models.aluno import PerfilEnum
 
 # Schema de criação de Aluno/Usuário
 class AlunoCreate(BaseModel):

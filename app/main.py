@@ -1,16 +1,17 @@
 from fastapi import FastAPI
 from app.database import engine, Base
-import app.models.usuario  # Importa os modelos para serem registados no Base
+import app.models.aluno  # Importa os modelos para serem registados no Base
 import app.models.assistido
 from app.routers import assistido
 import app.models.caso_juridico
 from app.routers import caso_juridico
 from app.routers import atendimento
 import app.models.atendimento
+from app.routers import aluno, assistido, caso_juridico, atendimento, atividade
 # Cria as tabelas na base de dados (se ainda não existirem)
 Base.metadata.create_all(bind=engine)
 
-from app.routers import aluno
+
 
 app = FastAPI(
     title="Sistema de Prática Jurídica - UNINASSAU",
@@ -21,6 +22,7 @@ app.include_router(aluno.router)
 app.include_router(assistido.router)
 app.include_router(caso_juridico.router)
 app.include_router(atendimento.router)
+app.include_router(atividade.router)
 
 @app.get("/")
 def root():

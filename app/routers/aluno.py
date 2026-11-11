@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from app.database import get_db
-from app.models.usuario import Usuario, MatriculaEstagio, PerfilEnum
+from app.models.aluno import Usuario, MatriculaEstagio, PerfilEnum
 from app.schemas.aluno import AlunoCreate, AlunoResponse
 
 router = APIRouter(
