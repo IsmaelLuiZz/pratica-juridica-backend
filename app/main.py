@@ -8,6 +8,9 @@ from app.routers import caso_juridico
 from app.routers import atendimento
 import app.models.atendimento
 from app.routers import aluno, assistido, caso_juridico, atendimento, atividade
+from app.routers import documento
+
+
 # Cria as tabelas na base de dados (se ainda não existirem)
 Base.metadata.create_all(bind=engine)
 
@@ -23,6 +26,7 @@ app.include_router(assistido.router)
 app.include_router(caso_juridico.router)
 app.include_router(atendimento.router)
 app.include_router(atividade.router)
+app.include_router(documento.router)
 
 @app.get("/")
 def root():

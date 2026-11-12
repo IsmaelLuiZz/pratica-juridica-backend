@@ -13,7 +13,7 @@ class PerfilEnum(str, enum.Enum):
 class Usuario(Base):
     __tablename__ = "usuario"
 
-    id = Column(Integer, primary_order=True, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     nome = Column(String(250), nullable=False)
     email = Column(String(250), unique=True, index=True, nullable=False)
     senha_hash = Column(String(255), nullable=False)
