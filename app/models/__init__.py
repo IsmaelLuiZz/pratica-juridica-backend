@@ -4,3 +4,4 @@ from app.models.atendimento import Atendimento
 from app.models.atividade import Atividade
 from app.models.caso_juridico import CasoJuridico
 from app.models.documento import Documento
+from app.models.prazo import Prazo
